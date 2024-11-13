@@ -1,0 +1,27 @@
+
+T15E4 000:318 SEGGER J-Link V4.96d Log File (0001ms, 0270ms total)
+T15E4 000:318 DLL Compiled: Jan 29 2015 11:45:37 (0001ms, 0270ms total)
+T15E4 000:318 Logging started @ 2024-11-14 00:25 (0001ms, 0270ms total)
+T15E4 000:319 JLINK_SetWarnOutHandler(...) (0000ms, 0270ms total)
+T15E4 000:319 JLINK_OpenEx(...)
+Firmware: J-Link V9 compiled May  7 2021 16:26:12
+Hardware: V9.40
+S/N: 59421155
+Feature(s): RDI, GDB, FlashDL, FlashBP, JFlash  returns O.K. (0269ms, 0539ms total)
+T15E4 000:588 JLINK_SetErrorOutHandler(...) (0000ms, 0539ms total)
+T15E4 000:588 JLINK_ExecCommand("ProjectFile = "C:\Users\Administrator\Desktop\APM\Examples\SysTick\SysTick\Project\MDK\JLinkSettings.ini"", ...)Device "UNSPECIFIED" selected.  returns 0x00 (0007ms, 0546ms total)
+T15E4 000:600 JLINK_ExecCommand("Device = APM32F003F6", ...)Device "UNSPECIFIED" selected.  returns 0x00 (0006ms, 0552ms total)
+T15E4 000:606 JLINK_ExecCommand("DisableConnectionTimeout", ...)  returns 0x01 (0000ms, 0552ms total)
+T15E4 000:606 JLINK_GetHardwareVersion()  returns 0x16F30 (0000ms, 0552ms total)
+T15E4 000:606 JLINK_GetDLLVersion()  returns 49604 (0000ms, 0552ms total)
+T15E4 000:606 JLINK_GetFirmwareString(...) (0000ms, 0552ms total)
+T15E4 000:636 JLINK_GetDLLVersion()  returns 49604 (0000ms, 0552ms total)
+T15E4 000:636 JLINK_GetCompileDateTime() (0000ms, 0552ms total)
+T15E4 000:643 JLINK_GetFirmwareString(...) (0000ms, 0552ms total)
+T15E4 000:650 JLINK_GetHardwareVersion()  returns 0x16F30 (0000ms, 0552ms total)
+T15E4 000:671 JLINK_TIF_Select(JLINKARM_TIF_SWD)  returns 0x00 (0001ms, 0553ms total)
+T15E4 000:672 JLINK_SetSpeed(50000) (0000ms, 0553ms total)
+T15E4 000:672 JLINK_GetId() >0x108 TIF> >0x108 TIF>  returns 0x00000000 (0204ms, 0757ms total)
+T15E4 002:323 JLINK_Close() (0001ms, 0758ms total)
+T15E4 002:323  (0001ms, 0758ms total)
+T15E4 002:323 Closed (0001ms, 0758ms total)
