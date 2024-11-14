@@ -564,6 +564,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\Boards\uart.c</FilePath>
             </File>
+            <File>
+              <FileName>beep.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Boards\beep.c</FilePath>
+            </File>
+            <File>
+              <FileName>err.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\Boards\err.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

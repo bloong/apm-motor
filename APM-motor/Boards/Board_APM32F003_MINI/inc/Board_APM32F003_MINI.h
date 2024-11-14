@@ -57,24 +57,24 @@
  * @brief LED1
  */
 #define APM_MINI_LED1_GPIO_PIN          GPIO_PIN_1
-#define APM_MINI_LED1_GPIO_PORT         GPIOD
+#define APM_MINI_LED1_GPIO_PORT         GPIOB
 /**
  * @brief LED2
  */
 #define APM_MINI_LED2_GPIO_PIN          GPIO_PIN_4
-#define APM_MINI_LED2_GPIO_PORT         GPIOD
+#define APM_MINI_LED2_GPIO_PORT         GPIOB
 
 /**
  * @brief LED3
  */
 #define APM_MINI_LED3_GPIO_PIN          GPIO_PIN_5
-#define APM_MINI_LED3_GPIO_PORT         GPIOD
+#define APM_MINI_LED3_GPIO_PORT         GPIOB
 
 /**
  * @brief LED4
  */
 #define APM_MINI_LED4_GPIO_PIN          GPIO_PIN_6
-#define APM_MINI_LED4_GPIO_PORT         GPIO6
+#define APM_MINI_LED4_GPIO_PORT         GPIOB
 
 /**@} end of group APM32F003_MINI_LED */
 

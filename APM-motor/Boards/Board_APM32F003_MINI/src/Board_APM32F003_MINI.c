@@ -95,7 +95,7 @@ void APM_MINI_LEDInit(APM_MINI_Led_TypeDef led)
 {
     GPIO_Config_T gpioConfig;
 
-    gpioConfig.mode = GPIO_MODE_OUT_PP;
+    gpioConfig.mode = GPIO_MODE_OUT_OD;
     gpioConfig.speed = GPIO_SPEED_10MHz;
     gpioConfig.intEn = GPIO_EINT_DISABLE;
     gpioConfig.pin = APM_MINI_LED[led].pin;

@@ -34,19 +34,19 @@ int main(void)
    //    motor_control_init(&mcs, 1.0, 0.1, 0.05, 0.5, 0.05, 0.02, 0.8, 0.02, 0.01);
 	 	     
 	    APM_DelayInit(APM_DELAY_MS);
-		APM_Delay(2000);
+	  	APM_Delay(2000);
  
-        init_beep(&sm);
+  //    init_beep(&g_beep_sm);
 
-		// 假设系统遇到了内存错误和网络错误
-		sys.err = set_error_flag(sys.err, E1_SHOCK);
- 
-		// 检查内存错误是否置位
-		if (is_error_flag_set(sys.err, E1_SHOCK)) {
-			printf("Memory error is set.\n");
-		} else {
-			printf("Memory error is not set.\n");
-		}
+//		// 假设系统遇到了内存错误和网络错误
+//		sys.err = set_error_flag(sys.err, E1_SHOCK);
+// 
+//		// 检查内存错误是否置位
+//		if (is_error_flag_set(sys.err, E1_SHOCK)) {
+//			printf("Memory error is set.\n");
+//		} else {
+//			printf("Memory error is not set.\n");
+//		}
 
        FMC_OPT();    
    
@@ -55,12 +55,13 @@ int main(void)
 
 	  //RCM_SwitchClockStruct_T switchClockStruct;
 
-    /* Setup SysTick Timer for 1 msec interrupts */
-    //  SysTick_Config(RCM_GetMasterClockFreq() / 1000);
+    /* Setup SysTick Timer for 10 msec interrupts */
+
+SysTick_Config(RCM_GetMasterClockFreq() / 100);
 
 //      APM_MINI_LEDInit(LED1); //PD1
-//      APM_MINI_LEDInit(LED2); //PD4
-//	    APM_MINI_LEDInit(LED3); //PD5
+       APM_MINI_LEDInit(LED2); //PD4
+ //	    APM_MINI_LEDInit(LED3); //PD5
 //      APM_MINI_LEDInit(LED4); //PD6
 	
     //  APM_MINI_LEDOn(LED2);
@@ -77,14 +78,15 @@ int main(void)
 	  //  LIS3DH_GetWHO_AM_I(&lisid);
     //  I2C_Init();
    
-     TM1650_init();
-     TM1650_cfg_display( TM1650_BRIGHT5 );
-     TM1650_clear();
-     
+//     TM1650_init();
+//     TM1650_cfg_display( TM1650_BRIGHT5 );
+//     TM1650_clear();
+//     
  //   ClockOutputInit();
   //  moto_stop();
 		 
- 
+    TMR2_Init(10000);
+
     while(1)
     {
 // 				for(int i=0; i<100; i++)
@@ -94,81 +96,87 @@ int main(void)
 //                   beep_loop(&sm);
 // 				}
 				 
-	          printf("123456\r\n");
+	        //  printf("123456\r\n");
 
-	 		  APM_Delay(1000);
+	 	  // APM_Delay(1000);
 
-				Key_name=TM1650_Get_KEY()%100/10;
-				if(Key_name <= 6 && Key_name >= 1)
-				{
-						TM1650_print(TM1650_DIG3,TUBE_TABLE_0[Key_name]);
-					  if(Key_name == 1)
-						{
-							  moto(true, false, true, false, pwm_L, pwm_R);
-						}
-						
-						if(Key_name == 2)
-						{
-						 	  moto(false, true, false, true, pwm_L, pwm_R);
-						}
-						  
-						if(Key_name == 3)
-						{
-							 pwm_L += 10; 
-						   pwm_R += 10; 
-						}
-						
-						if(Key_name == 4)
-						{
-							 pwm_L -= 10; 
-						   pwm_R -= 10; 
-						}
-						
-						 if(Key_name == 5)
-						{
-							 pwm_L = 0; 
-						   pwm_R = 0; 
-						}
-						
-					  if(Key_name == 6)
-						{
-							 pwm_L = 100; 
-						   pwm_R = 100; 
-						}
-						
-						if(pwm_L > 100)
-						{
-						    pwm_L = 100;
-						}
-										
-						if(pwm_R > 100)
-						{
-						    pwm_R = 100;
-						}		
-						
-						if(pwm_L < 0)
-						{
-						    pwm_L = 0;
-						}	
-						
-						if(pwm_R < 0)
-						{
-						    pwm_R = 0;
-						}	
-									 
-						TM1650_print(TM1650_DIG1,TUBE_TABLE_0[pwm_L/10]);
-						TM1650_print(TM1650_DIG2,TUBE_TABLE_0[pwm_L%10]);
- 		    }
-				else
-				{
-						 moto(false, false, false, false, 0, 0);
-				}
+			//	Key_name=TM1650_Get_KEY()%100/10;
+//				if(Key_name <= 6 && Key_name >= 1)
+//				{
+//						TM1650_print(TM1650_DIG3,TUBE_TABLE_0[Key_name]);
+//					  if(Key_name == 1)
+//						{
+//							  moto(true, false, true, false, pwm_L, pwm_R);
+//						}
+//						
+//						if(Key_name == 2)
+//						{
+//						 	  moto(false, true, false, true, pwm_L, pwm_R);
+//						}
+//						  
+//						if(Key_name == 3)
+//						{
+//							 pwm_L += 10; 
+//						   pwm_R += 10; 
+//						}
+//						
+//						if(Key_name == 4)
+//						{
+//							 pwm_L -= 10; 
+//						   pwm_R -= 10; 
+//						}
+//						
+//						 if(Key_name == 5)
+//						{
+//							 pwm_L = 0; 
+//						   pwm_R = 0; 
+//						}
+//						
+//					  if(Key_name == 6)
+//						{
+//							 pwm_L = 100; 
+//						   pwm_R = 100; 
+//						}
+//						
+//						if(pwm_L > 100)
+//						{
+//						    pwm_L = 100;
+//						}
+//										
+//						if(pwm_R > 100)
+//						{
+//						    pwm_R = 100;
+//						}		
+//						
+//						if(pwm_L < 0)
+//						{
+//						    pwm_L = 0;
+//						}	
+//						
+//						if(pwm_R < 0)
+//						{
+//						    pwm_R = 0;
+//						}	
+//									 
+//						TM1650_print(TM1650_DIG1,TUBE_TABLE_0[pwm_L/10]);
+//						TM1650_print(TM1650_DIG2,TUBE_TABLE_0[pwm_L%10]);
+// 		    }
+//				else
+//				{
+//						 moto(false, false, false, false, 0, 0);
+//				}
 				 
-			  if(sysTick >= 500)
+//		    moto(true, true, true, true, pwm_L, pwm_R);
+
+			  if(sysTick >= 10)  //100ms
 				{		  
-							sysTick = 0; 				 
+							sysTick = 0; 	
+						  APM_MINI_LEDToggle(LED2);
+           //   TMR2_Enable();
+
 				}
-				
+			    // 
+
 		}
 }
 

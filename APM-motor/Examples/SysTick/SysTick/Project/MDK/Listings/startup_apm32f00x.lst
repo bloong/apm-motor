@@ -369,12 +369,13 @@ ARM Macro Assembler    Page 6
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0+ --apcs=inter
 work --depend=.\objects\startup_apm32f00x.d -o.\objects\startup_apm32f00x.o -IC
-:\Users\Administrator\Desktop\APM\Examples\SysTick\SysTick\Project\MDK\RTE -IC:
-\Keil_v5\ARM\PACK\Geehy\APM32F00x_DFP\1.0.5 -IC:\Keil_v5\ARM\CMSIS\Include -IC:
-\Keil_v5\ARM\PACK\Geehy\APM32F00x_DFP\1.0.5\Device\Include --predefine="__UVISI
-ON_VERSION SETA 514" --predefine="APM32F00x_MD SETA 1" --predefine="USE_STDPERI
-PH_DRIVER SETA 1" --list=.\listings\startup_apm32f00x.lst ..\..\..\..\..\Librar
-ies\Device\Geehy\APM32F00x\Source\ARM\startup_apm32f00x.s
+:\Users\Administrator\Desktop\APM-motor\apm-motor\APM-motor\Examples\SysTick\Sy
+sTick\Project\MDK\RTE -IC:\Keil_v5\ARM\PACK\Geehy\APM32F00x_DFP\1.0.5 -IC:\Keil
+_v5\ARM\CMSIS\Include -IC:\Keil_v5\ARM\PACK\Geehy\APM32F00x_DFP\1.0.5\Device\In
+clude --predefine="__UVISION_VERSION SETA 514" --predefine="APM32F00x_MD SETA 1
+" --predefine="USE_STDPERIPH_DRIVER SETA 1" --list=.\listings\startup_apm32f00x
+.lst ..\..\..\..\..\Libraries\Device\Geehy\APM32F00x\Source\ARM\startup_apm32f0
+0x.s
 
 
 

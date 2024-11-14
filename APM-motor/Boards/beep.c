@@ -3,42 +3,9 @@
 #include "beep.h"
 
 #include <stdio.h>
-#include <unistd.h> // for sleep function
-
+ 
 StateMachine g_beep_sm;
 
-// 定义状态
-typedef enum
-{
-    STATE_SILENT,
-    STATE_CONTINUOUS_BEEP,
-    STATE_INTERMITTENT_BEEP,
-    STATE_FAST_BEEP
-} State;
-
-// 定义输入
-typedef enum
-{
-    INPUT_SET_SILENT,
-    INPUT_SET_CONTINUOUS_BEEP,
-    INPUT_SET_INTERMITTENT_BEEP,
-    INPUT_SET_FAST_BEEP
-} Input;
-
-// 蜂鸣器配置结构体
-typedef struct
-{
-    int frequency_ms; // 鸣响间隔（毫秒）
-    int count;        // 鸣响次数
-} BeeperConfig;
-
-// 状态机结构体
-typedef struct
-{
-    State current_state;
-    BeeperConfig config;
-    void (*handle_input)(struct StateMachine *sm, Input input);
-} StateMachine;
 
 // 辅助函数：模拟蜂鸣器鸣响
 void beep()
@@ -108,7 +75,7 @@ void handle_intermittent_beep(StateMachine *sm, Input input)
     {
         counter = 0;
     }
-    usleep(sm->config.frequency_ms * 1000);
+  //  usleep(sm->config.frequency_ms * 1000);
     switch (input)
     {
     case INPUT_SET_SILENT:
@@ -140,7 +107,7 @@ void handle_fast_beep(StateMachine *sm, Input input)
     {
         counter = 0;
     }
-    usleep(sm->config.frequency_ms * 1000);
+  //  usleep(sm->config.frequency_ms * 1000);
     switch (input)
     {
     case INPUT_SET_SILENT:
@@ -166,13 +133,16 @@ void init_beep(StateMachine *sm)
     sm->config.frequency_ms = 1000; // 默认1秒
     sm->config.count = 1;           // 默认1次
     sm->handle_input = handle_silent;
+	
+	  TMR2_Init(4000);
+
 }
 
 // 主循环 100ms 调用一次
 void beep_loop(StateMachine *sm)
 {
     Input input = INPUT_SET_CONTINUOUS_BEEP; // 你可以在这里改变输入
-    sm->handle_input(sm, input);
+   // sm->handle_input(sm, input);
 }
 
 // 设置蜂鸣器配置
@@ -183,6 +153,53 @@ void set_beeper_config(StateMachine *sm, int frequency_ms, int count)
 }
 
  
+/*!
+ * @brief       TMR2 Init
+ *
+ * @param       None
+ *
+ * @retval      None
+ */
+
+
+
+void TMR2_Init(uint32_t pwm_frequency)
+{
+    TMR2_OCConfig_T ocConfigStruct;
+    GPIO_Config_T gpio_struct;
+
+    // 配置GPIO
+    gpio_struct.pin = GPIO_PIN_3;
+    gpio_struct.speed = GPIO_SPEED_10MHz;
+    gpio_struct.mode = GPIO_MODE_OUT_PP;
+    gpio_struct.intEn = GPIO_EINT_DISABLE;
+
+    GPIO_Config(GPIOA, &gpio_struct);
+
+    // 假设系统时钟为24MHz
+    uint32_t system_clock = 24000000; // 24 MHz
+    uint32_t prescaler = 23; // 预分频器值
+    uint32_t timer_clock = system_clock / (prescaler + 1); // 计算定时器时钟
+
+    // 计算计数器周期值
+    uint16_t period = (timer_clock / pwm_frequency) - 1;
+
+    // 配置定时器基底
+    TMR2_ConfigTimerBase(prescaler, period);
+
+    // 配置通道3为PWM模式
+    ocConfigStruct.channel = TMR2_CHANNEL_3;
+    ocConfigStruct.count = period / 2; // 占空比为50%
+    ocConfigStruct.mode = TMR2_OC_MODE_PWM1;
+    ocConfigStruct.OCxOutputState = TMR2_OC_OUTPUT_ENABLE;
+    ocConfigStruct.OCxPolarity = TMR2_OC_POLARITY_HIGH;
+
+    TMR2_ConfigOutputCompare(&ocConfigStruct);
+
+    // 启用TMR2
+    TMR2_Enable();
+}
+
 
 // int main() {
 //     StateMachine sm;

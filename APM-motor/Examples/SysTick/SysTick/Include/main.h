@@ -29,7 +29,9 @@
 #include "lis3dhtr.h"
 #include "tm1650.h"
 #include "tm1650_config.h"
- #include "err.h"
+#include "err.h"
+#include "beep.h"
+
 
 extern uint32_t sysTick;
 
