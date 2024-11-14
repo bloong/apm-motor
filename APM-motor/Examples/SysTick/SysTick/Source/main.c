@@ -9,6 +9,7 @@
 
 uint8_t rxDataBuf[DATA_BUF_SIZE] = {'h','e','l','l','o',',','w','o','r','l','d','!'};
 
+struct sys_status sys;
 
 /* System tick */
 uint32_t sysTick = 0;
@@ -24,20 +25,32 @@ uint16_t pwm_L=30,pwm_R=30;
 /* USART Init */
 void USART_Init(void);
 
-
+ 
+  
 int main(void)
 {
 	
    //	   MotorControlSystem mcs;
    //    motor_control_init(&mcs, 1.0, 0.1, 0.05, 0.5, 0.05, 0.02, 0.8, 0.02, 0.01);
 	 	     
-	     APM_DelayInit(APM_DELAY_MS);
-		   APM_Delay(2000);
+	    APM_DelayInit(APM_DELAY_MS);
+		APM_Delay(2000);
+ 
+        init_beep(&sm);
+
+		// 假设系统遇到了内存错误和网络错误
+		sys.err = set_error_flag(sys.err, E1_SHOCK);
+ 
+		// 检查内存错误是否置位
+		if (is_error_flag_set(sys.err, E1_SHOCK)) {
+			printf("Memory error is set.\n");
+		} else {
+			printf("Memory error is not set.\n");
+		}
 
        FMC_OPT();    
    
-	
- 	     USART_Init();
+     //USART_Init();
  
 
 	  //RCM_SwitchClockStruct_T switchClockStruct;
@@ -78,9 +91,10 @@ int main(void)
 // 				{
 // 					 moto(i,i) ;
 // 					 APM_Delay(200);
+//                   beep_loop(&sm);
 // 				}
 				 
-	      printf("123456\r\n");
+	          printf("123456\r\n");
 
 	 		  APM_Delay(1000);
 
